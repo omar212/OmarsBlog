@@ -3,23 +3,22 @@ import styles from "./card.module.css";
 import Image from "next/image";
 
 
-const Card = () => {
+const Card = ({ key, item }) => {
     return (
-        <div className={styles.container}>
+        <div className={styles.container} key={key}>
             <div className={styles.imageContainer}>
                 <Image src="/p1.jpeg" alt="" fill className={styles.image} />
             </div>
             <div className={styles.textContainer}>
                 <div className={styles.detail}>
-                    <span className={styles.date}>11.02.2023 - </span>
-                    <span className={styles.category}>CULTURE</span>
+                    <span className={styles.date}>{item.createdAt} - </span>
+                    <span className={styles.category}>{item.title}</span>
                 </div>
                 <Link href="/">
-                    <h1 className={styles.title}>Lorem ipsum dolor sit amet</h1>
+                    <h1 className={styles.title}>{item.title}</h1>
                 </Link>
                 <p className={styles.desc}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                    vehicula, sapien nec vehicula.
+                    {item.desc}
                 </p>
                 <Link className={styles.link} href="/">
                     Read More
