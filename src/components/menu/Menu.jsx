@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./menu.module.css";
 import MenuPosts from "@/components/menuPosts/MenuPosts";
 import MenuCategories from "@/components/menuCategories/MenuCategories";
+
 const Menu = () => {
     return (
         <div className={styles.container}>
@@ -19,7 +20,7 @@ const Menu = () => {
             {/* With Image */}
             <h2 className={styles.subtitle}>Chosen by the editor</h2>
             <h1 className={styles.title}>Editors Pick</h1>
-            <MenuPosts withImage />
+            <MenuPosts withImage={true} />
         </div>
     )
 }
