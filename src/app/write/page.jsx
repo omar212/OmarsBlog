@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from "./writePage.module.css"
 import Image from 'next/image';
-import ReactQuill from 'react-quill';
 import "react-quill/dist/quill.bubble.css";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -17,6 +16,7 @@ const storage = getStorage(app);
 const WritePage = () => {
 
     const { status } = useSession()
+    const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
     const router = useRouter()
 
