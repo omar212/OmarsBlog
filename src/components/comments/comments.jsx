@@ -25,12 +25,12 @@ const Comments = ({ postSlug }) => {
 
     console.log({postSlug})
 
-    const { data, mutate, isLoading } = useSWR(`http://localhost:3000/api/comments?postSlug=${postSlug}`, fetcher)
+    const { data, mutate, isLoading } = useSWR(`${process.env.NEXTAUTH_URL}/api/comments?postSlug=${postSlug}`, fetcher)
 
     const [desc, setDesc] = useState("")
 
     const handleSubmit = async () => {
-        await fetch("/api/comments", { 
+        await fetch(`${process.env.NEXTAUTH_URL}/api/comments`, { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
