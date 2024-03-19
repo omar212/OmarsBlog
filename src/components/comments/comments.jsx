@@ -23,14 +23,20 @@ const Comments = ({ postSlug }) => {
 
     const { status  } = useSession()
 
-    console.log({postSlug})
+    let base_url;
 
-    const { data, mutate, isLoading } = useSWR(`${process.env.NEXTAUTH_URL}/api/comments?postSlug=${postSlug}`, fetcher)
+    if (process.env.NODE_ENV === 'production') {
+        base_url = process.env.PRODUCTION_BASE_URL;
+    } else {
+        base_url = process.env.LOCAL_BASE_URL;
+    }
+
+    const { data, mutate, isLoading } = useSWR(`${base_url}/api/comments?postSlug=${postSlug}`, fetcher)
 
     const [desc, setDesc] = useState("")
 
     const handleSubmit = async () => {
-        await fetch(`${process.env.NEXTAUTH_URL}/api/comments`, { 
+        await fetch(`${base_url}/api/comments`, { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -40,7 +46,6 @@ const Comments = ({ postSlug }) => {
         mutate();
     }
 
-    console.log("data from comments component ---> ", data)
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Comments</h1>

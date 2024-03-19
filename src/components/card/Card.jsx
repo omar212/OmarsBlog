@@ -2,9 +2,7 @@ import Link from "next/link";
 import styles from "./card.module.css";
 import Image from "next/image";
 
-
 const Card = ({ key, item }) => {
-    console.log(item);
     return (
         <div className={styles.container} key={key}>
             {

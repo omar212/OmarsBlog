@@ -5,7 +5,15 @@ import Card from "@/components/card/Card";
 
 
 const getData = async (page, cat) => {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/posts?page=${page}&cat=${cat || ""}`, {
+    let base_url;
+
+    if (process.env.NODE_ENV === 'production') {
+        base_url = process.env.PRODUCTION_BASE_URL;
+    } else {
+        base_url = process.env.LOCAL_BASE_URL;
+    }
+
+    const res = await fetch(`${base_url}/api/posts?page=${page}&cat=${cat || ""}`, {
         cache: "no-store",
     });
 

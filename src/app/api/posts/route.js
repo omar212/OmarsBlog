@@ -32,7 +32,6 @@ export const GET = async (req) => {
         )
 
     } catch (error) {
-        console.log(error)
         return new NextResponse( 
             JSON.stringify({ message: "Something went wrong. Please try again later." }, { status: 500 })
         )
@@ -45,8 +44,6 @@ export const GET = async (req) => {
 export const POST = async (req) => {
     
     const session = await getAuthSession();
-
-    console.log("LOOK HERE: ", session)
     
     // if no session we are not allowed to create a new comment
     if(!session) {
@@ -58,8 +55,6 @@ export const POST = async (req) => {
     try {
         const body = await req.json();
 
-        console.log("body from route.js comments ", body)
-
         const post = await prisma.Post.create({
             // grabbing user from backend
             data: {...body, userEmail: session.user.email}
@@ -67,7 +62,6 @@ export const POST = async (req) => {
         
         return new NextResponse(JSON.stringify(post, { status: 200 }));
     } catch (error) {
-        console.log(error);
         return new NextResponse(
         JSON.stringify({ message: "Something went wrong. Please try again later." }, { status: 500 })
         );

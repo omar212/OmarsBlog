@@ -5,7 +5,15 @@ import Comments from "@/components/comments/comments"
 
 
 const getData = async (slug) => {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/posts/${slug}`, {
+    let base_url;
+
+    if (process.env.NODE_ENV === 'production') {
+        base_url = process.env.PRODUCTION_BASE_URL;
+    } else {
+        base_url = process.env.LOCAL_BASE_URL;
+    }
+
+    const res = await fetch(`${base_url}/api/posts/${slug}`, {
         cache: "no-store",
     });
 
@@ -20,10 +28,6 @@ const getData = async (slug) => {
 
 const SinglePage = async ({ params }) => {
     const { slug } = params;
-
-    console.log({
-        slug
-    })
 
     const data = await getData(slug);
 

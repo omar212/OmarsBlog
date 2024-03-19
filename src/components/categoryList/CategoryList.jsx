@@ -4,7 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 
 const getData = async () => {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/categories`, {
+    let base_url;
+
+    if (process.env.NODE_ENV === 'production') {
+        base_url = process.env.PRODUCTION_BASE_URL;
+    } else {
+        base_url = process.env.LOCAL_BASE_URL;
+    }
+
+    const res = await fetch(`${base_url}/api/categories`, {
         cache: "no-store",
     });
 
@@ -17,9 +25,6 @@ const getData = async () => {
 
 const CategoryList = async () => {
     const data = await getData();
-
-    console.log(data);
-    debugger;  
 
     return (
         <div className={styles.container}>

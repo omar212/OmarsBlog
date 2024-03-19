@@ -6,8 +6,6 @@ export const GET = async (req, { params }) => {
 
    const { slug } = params
 
-   console.log({slug})
-
     try {
 
         const post = await prisma.post.update({
@@ -24,7 +22,6 @@ export const GET = async (req, { params }) => {
         )
 
     } catch (error) {
-        console.log(error)
         return new NextResponse( 
             JSON.stringify({ message: "Something went wrong. Please try again later." }, { status: 500 })
         )

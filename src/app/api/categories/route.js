@@ -3,7 +3,6 @@ import { NextResponse } from "next/server"
 
 export const GET = async () => {
     try {
-
         const categories = await prisma.Category.findMany()
 
         return new NextResponse(
@@ -11,7 +10,6 @@ export const GET = async () => {
         )
 
     } catch (error) {
-        console.log(error)
         return new NextResponse(
             JSON.stringify({ message: "Something went wrong. Please try again later." }, { status: 500 })
         )
