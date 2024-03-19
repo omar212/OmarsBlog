@@ -21,22 +21,14 @@ const fetcher = async (url) => {
 
 const Comments = ({ postSlug }) => {
 
-    const { status  } = useSession()
+    const { status } = useSession()
 
-    let base_url;
-
-    if (process.env.NODE_ENV === 'production') {
-        base_url = process.env.PRODUCTION_BASE_URL;
-    } else {
-        base_url = process.env.LOCAL_BASE_URL;
-    }
-
-    const { data, mutate, isLoading } = useSWR(`${base_url}/api/comments?postSlug=${postSlug}`, fetcher)
+    const { data, mutate, isLoading } = useSWR(`/api/comments?postSlug=${postSlug}`, fetcher)
 
     const [desc, setDesc] = useState("")
 
     const handleSubmit = async () => {
-        await fetch(`${base_url}/api/comments`, { 
+        await fetch("/api/comments", { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

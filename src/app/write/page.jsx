@@ -93,15 +93,7 @@ const WritePage = () => {
     const slugify = (text) => text.toLowerCase().trim().replace(/[^\w\s-]/g, "").replace(/[\s_-]/g, "-").replace(/^-+|-+$/g, "")
 
     const handleSubmit = async () => {
-        let base_url;
-
-        if (process.env.NODE_ENV === 'production') {
-            base_url = process.env.PRODUCTION_BASE_URL;
-        } else {
-            base_url = process.env.LOCAL_BASE_URL;
-        }
-
-        const res = await fetch(`${base_url}/api/posts`, {
+        const res = await fetch("/api/posts", {
             method: "POST",
             body: JSON.stringify({ 
                 title, 
